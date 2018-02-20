@@ -55,7 +55,7 @@ AppAsset::register($this);
                     ['label' =>  Yii::t('main', 'Administrate'), 'url' => ['/admin']],
                     ['label' =>  Yii::t('main', 'Routes'), 'url' => ['/admin/route']],
                     ['label' =>  Yii::t('main', 'Permissions'), 'url' => ['/admin/permission']],
-                    ['label' =>  Yii::t('main', 'Menu'), 'url' => ['/admin/menu']],
+                    /*['label' =>  Yii::t('main', 'Menu'), 'url' => ['/admin/menu']],*/
                     ['label' =>  Yii::t('main', 'Roles'), 'url' => ['/admin/role']],
                 ],
             ];
@@ -64,6 +64,17 @@ AppAsset::register($this);
         if (Yii::$app->user->can('administrateUser')) {
             $menuItems[] = ['label' => 'Users', 'url' => ['/user/admin/index']];
         }
+
+        $menuItems[] = [
+            'label' => 'Settings',
+            'options' => ['class' => 'header'],
+            'url' => '#',
+            'items' => [
+                ['label' =>  Yii::t('main', 'Main Settings'), 'url' => ['/settings']],
+                ['label' =>  Yii::t('main', 'Commands'), 'url' => ['/command']],
+                ['label' =>  Yii::t('main', 'Menu'), 'url' => ['/comenu']],
+            ],
+        ];
 
         $menuItems[] = [
             'label' => Yii::$app->user->identity->username,

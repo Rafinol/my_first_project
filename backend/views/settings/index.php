@@ -1,7 +1,7 @@
 <?php
 
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -13,22 +13,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Settings', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="row">
+        <div class="col-lg-5">
+            <?php $form = ActiveForm::begin(['id' => 'setting-form']); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            <?= $form->field($model, 'token')->textInput(['autofocus' => true]) ?>
 
-            'id',
-            'token',
-            'bot_name',
-            'webhook',
-            'account',
+            <?= $form->field($model, 'bot_name') ?>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+            <?= $form->field($model, 'webhook') ?>
+
+            <?= $form->field($model, 'account') ?>
+
+            <div class="form-group">
+                <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
+
 </div>

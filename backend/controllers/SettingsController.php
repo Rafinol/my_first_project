@@ -10,7 +10,9 @@ namespace backend\controllers;
 
 use app\models\Settings;
 use app\services\Tlgrm;
+use backend\forms\SettingsForm;
 use Longman\TelegramBot\Telegram;
+use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
 
@@ -20,25 +22,32 @@ class SettingsController extends Controller
     private $telegram;
     private $settings;
     
-    public function beforeAction()
+    public function beforeAction($action)
     {
+
         $this->settings = Settings::getSettings();
-        $this->telegram = new Telegram($this->settings->token, $this->settings->bot_name);
+        $this->telegram = isset($this->settings->token) ? new Telegram($this->settings->token, $this->settings->bot_name) : [];
+        parent::beforeAction($action);
+        return true;
     }
     
     public function actionIndex()
     {
         $form = new SettingsForm();
+        $form->load($this->settings);
         if ($form->load(Yii::$app->request->post()) && $form->validate() && $form->token != $this->settings->token) {
-            $tlgrm = new Tlgrm($this->settings->token);
+            $tlgrm = new Tlgrm($form->token);
             if ($tlgrm->getMe()) {
-                $result = $this->telegram->setWebhook(Url::home(true).$this->settings->webhook);
-                if ($result->isOk())
-                    echo $result->getDescription();
+                $this->telegram = new Telegram($form->token, $form->bot_name);
+                $result = $this->telegram->setWebhook(Url::home('https').$form->webhook);
+                if ($result->isOk()){
+                    $form->save();
+                }
+                else{
+                    echo $result->getDescription();//Отправим нотификацию
+                }
+
             }
-        }
-        else{
-            $form = $this->settings;
         }
 
         return $this->render('index', [
@@ -48,6 +57,10 @@ class SettingsController extends Controller
 
     public function actionHook()
     {
+        $commands_paths = [
+            YiiBase::getPathOfAlias('backend').'/Commands',
+        ];
+        $this->telegram->addCommandsPaths($commands_paths);
         $this->telegram->handle();
     }
 }
