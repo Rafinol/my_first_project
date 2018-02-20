@@ -39,9 +39,16 @@ class SettingsController extends Controller
             $tlgrm = new Tlgrm($form->token);
             if ($tlgrm->getMe()) {
                 $this->telegram = new Telegram($form->token, $form->bot_name);
-                $result = $this->telegram->setWebhook(Url::home('https').$form->webhook);
+                $result = $this->telegram->setWebhook(Url::home('https').'admin/'.$form->webhook);
                 if ($result->isOk()){
-                    $form->save();
+                    $this->settings->token = $form->token;
+                    $this->settings->bot_name = $form->bot_name;
+                    $this->settings->webhook = $form->webhook;
+                    $this->settings->account = $form->account;
+
+                    if(!$this->settings->save()){
+                        print_r($this->settings->errorMsg());
+                    }
                 }
                 else{
                     echo $result->getDescription();//Отправим нотификацию

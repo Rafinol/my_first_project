@@ -36,17 +36,19 @@ class StartCommand extends SystemCommand
      */
     public function execute()
     {
-        $text = Menu::getByName($this->name). PHP_EOL;
+        $menu = Menu::getByName($this->name);
+        $text = $menu->description. PHP_EOL;
         $data['chat_id'] = $this->getMessage()->getChat()->getId();
         $data['text'] = $text;
+        $inlines = $menu->Inline->via('InlineMenu');
         $inline_keyboard = new InlineKeyboard([
-            ['text' => 'inline', 'switch_inline_query' => $switch_element],
-            ['text' => 'inline current chat', 'switch_inline_query_current_chat' => $switch_element],
+            ['text' => 'inline', 'switch_inline_query' => true],
+            ['text' => 'inline current chat', 'switch_inline_query_current_chat' => true],
         ], [
             ['text' => 'callback', 'callback_data' => 'identifier'],
             ['text' => 'open url', 'url' => 'https://github.com/php-telegram-bot/core'],
         ]);
-        $data['reply_markup'] => $inline_keyboard,
+        $data['reply_markup'] = $inline_keyboard;
         return Request::sendMessage($data);
     }
 }

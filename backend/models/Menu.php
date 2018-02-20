@@ -35,6 +35,11 @@ class Menu extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getInlineMenu()
+    {
+        return $this->hasMany(InlineMenu::className(), ['menu_id' => 'id']);
+    }
+
     public function getDescription()
     {
         return $this->description;
