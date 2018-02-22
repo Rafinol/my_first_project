@@ -9,6 +9,8 @@
 namespace app\models;
 
 
+
+
 class Menu extends \yii\db\ActiveRecord
 {
     public static function tableName()
@@ -40,14 +42,24 @@ class Menu extends \yii\db\ActiveRecord
         return $this->hasMany(InlineMenu::className(), ['menu_id' => 'id']);
     }
 
-    public function getDescription()
+    public function getInline()
+    {
+        return $this->hasMany(Inline::className(), ['id' => 'inline_id'])->viaTable('inline_menu', ['menu_id' => 'id']);
+    }
+
+    public function getDescription($user)
     {
         return $this->description;
     }
+
 
     public static function getByName($name)
     {
         return self::find()->where(['name'=>$name])->one();
     }
 
+    public static function getAllMenu()
+    {
+        return self::findAll();
+    }
 }

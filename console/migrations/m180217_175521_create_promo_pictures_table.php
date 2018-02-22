@@ -17,7 +17,7 @@ class m180217_175521_create_promo_pictures_table extends Migration
             'promo_name' => $this->string(),
             'promo_day' => $this->integer(),
             'promo_way' => $this->string(),
-            'promo_telegram_id' => $this->integer()->null(),
+            'promo_telegram_id' => $this->string()->null(),
         ]);
     }
 

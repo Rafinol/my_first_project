@@ -21,7 +21,8 @@
         "dektrium/yii2-user": "0.9.*@dev",
         "githubjeka/yii2-gui-rbac": "*",
         "mdmsoft/yii2-admin": "2.x-dev",
-        "longman/telegram-bot": "dev-master"
+        "longman/telegram-bot": "dev-master",
+        "yii-dream-team/yii2-upload-behavior": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -13,17 +13,17 @@ class m180217_213855_insert_inline extends Migration
         $this->insert('inline',array(
             'name'=>'hello',
             'button'=>'inline-hello',
-            'menu_id'=>'2',
+            'menu_id'=>'3',
         ));
         $this->insert('inline',array(
             'name'=>'echo',
             'button'=>'inline-echo',
-            'menu_id'=>'2',
+            'menu_id'=>'4',
         ));
         $this->insert('inline',array(
             'name'=>'promo',
             'button'=>'inline-promo',
-            'menu_id'=>'2',
+            'menu_id'=>'5',
         ));
         $this->insert('inline',array(
             'name'=>'back',

@@ -1,25 +1,33 @@
 <?php
 
-namespace Longman\TelegramBot\Commands\SystemCommands;
+namespace Longman\TelegramBot\Commands\UserCommands;
 
+
+use app\models\Menu;
+use backend\services\repo\InlineRepo;
 use Longman\TelegramBot\Commands\SystemCommand;
-use Longman\TelegramBot\Commands\UserCommands\CommonCommand;
+use Longman\TelegramBot\Commands\UserCommand;
+use Longman\TelegramBot\Entities\InlineKeyboard;
 use Longman\TelegramBot\Entities\Update;
+use Longman\TelegramBot\Request;
+use Yii;
 
-class StartCommand extends SystemCommand
+class HelloCommand extends UserCommand
 {
+
+
     /**
      * @var string
      */
-    protected $name = 'start';
+    protected $name = 'hello';
     /**
      * @var string
      */
-    protected $description = 'Start command';
+    protected $description = 'Hello command';
     /**
      * @var string
      */
-    protected $usage = '/start';
+    protected $usage = '/hello';
     /**
      * @var string
      */
@@ -27,7 +35,7 @@ class StartCommand extends SystemCommand
     /**
      * @var bool
      */
-    protected $private_only = true;
+    protected $private_only = false;
 
     /**
      * Command execute method
@@ -35,6 +43,8 @@ class StartCommand extends SystemCommand
      * @return \Longman\TelegramBot\Entities\ServerResponse
      * @throws \Longman\TelegramBot\Exception\TelegramException
      */
+
+
 
     public function execute()
     {

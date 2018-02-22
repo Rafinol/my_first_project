@@ -11,6 +11,7 @@ namespace backend\controllers;
 use app\models\Settings;
 use app\services\Tlgrm;
 use backend\forms\SettingsForm;
+use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Telegram;
 use Yii;
 use yii\helpers\Url;
@@ -24,7 +25,7 @@ class SettingsController extends Controller
     
     public function beforeAction($action)
     {
-
+        $this->enableCsrfValidation = ($action->id !== "hook");
         $this->settings = Settings::getSettings();
         $this->telegram = isset($this->settings->token) ? new Telegram($this->settings->token, $this->settings->bot_name) : [];
         parent::beforeAction($action);
@@ -33,13 +34,13 @@ class SettingsController extends Controller
     
     public function actionIndex()
     {
+
         $form = new SettingsForm();
-        $form->load($this->settings);
-        if ($form->load(Yii::$app->request->post()) && $form->validate() && $form->token != $this->settings->token) {
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) { //&& $form->token != $this->settings->token
             $tlgrm = new Tlgrm($form->token);
             if ($tlgrm->getMe()) {
                 $this->telegram = new Telegram($form->token, $form->bot_name);
-                $result = $this->telegram->setWebhook(Url::home('https').'admin/'.$form->webhook);
+                $result = $this->telegram->setWebhook(Url::home('https').$form->webhook);
                 if ($result->isOk()){
                     $this->settings->token = $form->token;
                     $this->settings->bot_name = $form->bot_name;
@@ -56,6 +57,12 @@ class SettingsController extends Controller
 
             }
         }
+        else{
+             $form->token = $this->settings->token;
+             $form->bot_name = $this->settings->bot_name;
+             $form->webhook = $this->settings->webhook;
+             $form->account = $this->settings->account;
+        }
 
         return $this->render('index', [
             'model' => $form,
@@ -64,10 +71,23 @@ class SettingsController extends Controller
 
     public function actionHook()
     {
+
         $commands_paths = [
-            YiiBase::getPathOfAlias('backend').'/Commands',
+            \Yii::$app->basePath.'/services/Commands',
         ];
         $this->telegram->addCommandsPaths($commands_paths);
-        $this->telegram->handle();
+
+        try {
+            $this->telegram->handle();
+        }
+        catch (TelegramException $e) {
+            Yii::warning(print_r($e->getMessage(),true), 'path2');
+        }
     }
+
+    public function actionUnhook()
+    {
+        $this->telegram->deleteWebhook();
+    }
+
 }

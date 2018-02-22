@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e12b9f54db6cff6c0b8fe293c4d74b18",
+    "content-hash": "16301deab6fafa8955bcda2361bf7e80",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -667,6 +667,53 @@
             "time": "2018-01-07T23:39:21+00:00"
         },
         {
+            "name": "masterexploder/phpthumb",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/masterexploder/PHPThumb.git",
+                "reference": "01f6aa65aa3d136e175f67da2b4ea3e316770d02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/masterexploder/PHPThumb/zipball/01f6aa65aa3d136e175f67da2b4ea3e316770d02",
+                "reference": "01f6aa65aa3d136e175f67da2b4ea3e316770d02",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPThumb": "src",
+                    "PHPThumb\\Tests": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jarrod Nettles",
+                    "email": "jarrod.nettles@icloud.com"
+                },
+                {
+                    "name": "Ian Selby",
+                    "email": "ian@gxdlabs.com"
+                }
+            ],
+            "description": "A library for manipulating images in PHP.",
+            "homepage": "https://github.com/masterexploder/PHPThumb",
+            "keywords": [
+                "image",
+                "resize",
+                "rotate"
+            ],
+            "time": "2015-09-08T22:55:44+00:00"
+        },
+        {
             "name": "mdmsoft/yii2-admin",
             "version": "dev-master",
             "source": {
@@ -959,17 +1006,66 @@
             "time": "2018-02-14T07:46:01+00:00"
         },
         {
+            "name": "yii-dream-team/yii2-upload-behavior",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii-dream-team/yii2-upload-behavior.git",
+                "reference": "cdb45e68014476765188c387fafcb7fd30d2ad0a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii-dream-team/yii2-upload-behavior/zipball/cdb45e68014476765188c387fafcb7fd30d2ad0a",
+                "reference": "cdb45e68014476765188c387fafcb7fd30d2ad0a",
+                "shasum": ""
+            },
+            "require": {
+                "masterexploder/phpthumb": "*",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yiidreamteam\\upload\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Samoylov",
+                    "email": "alexey.samoylov@gmail.com",
+                    "homepage": "http://yiidreamteam.com/team/alexey",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 file/image upload behavior for ActiveRecord",
+            "homepage": "http://yiidreamteam.com/yii2/upload-behavior",
+            "keywords": [
+                "Behavior",
+                "file",
+                "image",
+                "resize",
+                "thumb",
+                "upload"
+            ],
+            "time": "2017-10-26T15:44:40+00:00"
+        },
+        {
             "name": "yiisoft/yii2",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "d6af724e96a5f2d82385c1477d24fbfddcde4a0b"
+                "reference": "89274d0a67d9f2ae1ae23b170f80d66b07cb747e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/d6af724e96a5f2d82385c1477d24fbfddcde4a0b",
-                "reference": "d6af724e96a5f2d82385c1477d24fbfddcde4a0b",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/89274d0a67d9f2ae1ae23b170f80d66b07cb747e",
+                "reference": "89274d0a67d9f2ae1ae23b170f80d66b07cb747e",
                 "shasum": ""
             },
             "require": {
@@ -1056,7 +1152,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2018-02-17T11:16:15+00:00"
+            "time": "2018-02-22T09:28:56+00:00"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -1432,12 +1528,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "36f06789f1f30ba2fc3c15358a90059e77f112b8"
+                "reference": "f7d51457c7c59f02aca9bbaabcded00e81800adb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/36f06789f1f30ba2fc3c15358a90059e77f112b8",
-                "reference": "36f06789f1f30ba2fc3c15358a90059e77f112b8",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/f7d51457c7c59f02aca9bbaabcded00e81800adb",
+                "reference": "f7d51457c7c59f02aca9bbaabcded00e81800adb",
                 "shasum": ""
             },
             "require": {
@@ -1471,7 +1567,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2018-02-16T15:34:52+00:00"
+            "time": "2018-02-18T20:12:50+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -1479,12 +1575,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-faker.git",
-                "reference": "1d2154a5053dd1a628455d81542e3436d653047e"
+                "reference": "bc6238fc7478d0eb252ee7144d98b9c6e732ec55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/1d2154a5053dd1a628455d81542e3436d653047e",
-                "reference": "1d2154a5053dd1a628455d81542e3436d653047e",
+                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/bc6238fc7478d0eb252ee7144d98b9c6e732ec55",
+                "reference": "bc6238fc7478d0eb252ee7144d98b9c6e732ec55",
                 "shasum": ""
             },
             "require": {
@@ -1518,7 +1614,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2018-02-05T08:50:49+00:00"
+            "time": "2018-02-19T20:27:40+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",

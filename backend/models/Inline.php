@@ -46,14 +46,19 @@ class Inline extends \yii\db\ActiveRecord
         ];
     }
 
-    public function geMenu()
+    public function getMenu()
     {
-        return $this->hasOne(Menu::className(), ['menu_id' => 'id']);
+        return $this->hasOne(Menu::className(), ['id' => 'menu_id']);
     }
 
     public function getInlineMenu()
     {
         return $this->hasMany(InlineMenu::className(), ['menu_id' => 'menu_id']);
+    }
+
+    public static function getByName($name)
+    {
+        return self::find()->where(['name'=>$name])->one();
     }
 
 }

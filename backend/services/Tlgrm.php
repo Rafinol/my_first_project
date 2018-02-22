@@ -1,24 +1,33 @@
 <?php
 namespace app\services;
 
+use app\models\PromoPictures;
+use app\models\Settings;
+use Longman\TelegramBot\Commands\UserCommands\SendphotoCommand;
+use Longman\TelegramBot\Request;
+use Longman\TelegramBot\Telegram;
+use yii\helpers\Url;
+
 class Tlgrm
 {
-    const DOMAIN = 'https://api.telegram.org/';
-    const BOT = 'bot';
+    public $telegram;
 
-    private $client;
-    private $token;
-
-    public function __construct($token)
+    public function __construct()
     {
-        $this->client = new \GuzzleHttp\Client();
-        $this->token = $token;
+        $settings = Settings::getSettings();
+        $this->telegram = isset($settings->token) ? new Telegram($settings->token, $settings->bot_name) : [];
     }
-
-    public function getMe()
+    public function sendMeFile($file_id)
     {
-        $res = $this->client->request('GET', self::DOMAIN.self::BOT.$this->token.'/getMe')->getStatusCode();
-        if($res==200) return true;
-        return false;
+        $file = PromoPictures::findOne($file_id);
+        //\Yii::warning(print_r($file,true),'qqq');
+        $data = [
+            'chat_id' => Settings::getNotifiedUser(),
+            'photo'   =>  Url::home('https').$file->getImageFileUrl('promo_way')//\Yii::$app->basePath.'/web/images/'.$file->promo_way,
+        ];
+        //\Yii::warning(print_r(Url::home(true).$file->getImageFileUrl('promo_way'),true),'sssss');
+        $telegram_id = Request::sendPhoto($data);
+
+        $file->updateTelegramId($telegram_id->result->photo[1]['file_id']);
     }
 }
